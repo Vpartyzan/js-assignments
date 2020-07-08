@@ -251,7 +251,7 @@ function getMovingSum(arr) {
  * [ "a" ] => []
  */
 function getSecondItems(arr) {
-   return arr.filter((a, i) => i%2!==0);
+   return arr.filter((_, i) => i%2!==0);
 }
 
 
@@ -270,7 +270,7 @@ function getSecondItems(arr) {
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-   throw new Error('Not implemented');
+   return arr.reduce( (value, item, index) => (  value.concat(Array.from( { length: index + 1 }, () => item))), []);
 }
 
 
@@ -288,7 +288,7 @@ function propagateItemsByPositionIndex(arr) {
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
 function get3TopItems(arr) {
-   throw new Error('Not implemented');
+   return arr.sort( (a, b) => (a < b) ? 1 : ( a == b) ? 0 : -1  ).filter( (_, i) => i < 3 );
 }
  
  
@@ -306,7 +306,7 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-   throw new Error('Not implemented');
+   return arr.filter( a => a > 0 && typeof a == 'number' ).length;
 }
  
 /** 
@@ -339,7 +339,7 @@ function sortDigitNamesByNumericOrder(arr) {
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
 function getItemsSum(arr) {
-   throw new Error('Not implemented');
+   return (arr.length == 0) ? 0 : arr.reduce( (a,b) => a+b);
 }
  
 /** 
@@ -355,7 +355,7 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-   throw new Error('Not implemented');
+   return arr.filter( a => Boolean(a) !== true).length;
 }
 
 /**
@@ -373,7 +373,7 @@ function getFalsyValuesCount(arr) {
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurences(arr, item) {
-   throw new Error('Not implemented');
+   return arr.filter( v => v === item).length;
 }
 
 /**
@@ -388,7 +388,7 @@ function findAllOccurences(arr, item) {
  *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'
  */
 function toStringList(arr) {
-   throw new Error('Not implemented');
+   return arr.join(',');
 }
 
 
@@ -417,7 +417,7 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  */
 function sortCitiesArray(arr) {
-   throw new Error('Not implemented');
+   return arr.sort( (a, b) => (a.country > b.country) ? 1 : -1);
 }
 
 /**
