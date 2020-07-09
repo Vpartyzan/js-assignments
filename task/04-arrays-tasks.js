@@ -441,7 +441,7 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]   
  */
 function getIdentityMatrix(n) {
-   return Array(n).fill(0).map( (v, i) => Array(n).fill(0).map( (v2, i2) => 1 - Math.min(Math.abs(i-i2), 1)));
+   return Array(n).fill(0).map( (_, i) => Array(n).fill(0).map( (_, i2) => 1 - Math.min(Math.abs(i-i2), 1)));
 }
 
 /**
@@ -473,7 +473,7 @@ function getIntervalArray(start, end) {
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) {
-   throw new Error('Not implemented');
+   return arr.filter( (val, ind) => arr.indexOf(val) === ind );
 }
 
 /**
@@ -507,7 +507,12 @@ function distinct(arr) {
  *   }
  */
 function group(array, keySelector, valueSelector) {
-   throw new Error('Not implemented');
+   let map = new Map();
+   let struct = array.map((_, i) => array.filter(el => keySelector(el) === keySelector(array[i])));
+   let arrValue = struct.map(e => e.map(el => valueSelector(el)));
+   let arrKey = struct.map(e => keySelector(e[0])).map((e, i) => map.set(e,arrValue[i]));
+   return map;
+        
 }
 
 
