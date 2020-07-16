@@ -85,7 +85,7 @@ function getArrayOfPositives(arr) {
  *    [ 'cat, 'dog', 'raccon' ] => [ 'cat', 'dog', 'racoon' ]
  */
 function getArrayOfStrings(arr) {
-   return arr.filter( value => (typeof(value) == 'string'));
+   return arr.filter( value => (typeof(value) === 'string'));
 }
 
 /**
@@ -288,7 +288,7 @@ function propagateItemsByPositionIndex(arr) {
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
 function get3TopItems(arr) {
-   return arr.sort( (a, b) => (a < b) ? 1 : ( a == b) ? 0 : -1  ).filter( (_, i) => i < 3 );
+   return arr.sort( (a, b) => (a < b) ? 1 : ( a === b) ? 0 : -1  ).filter( (_, i) => i < 3 );
 }
  
  
@@ -306,7 +306,7 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-   return arr.filter( a => a > 0 && typeof a == 'number' ).length;
+   return arr.filter( a => a > 0 && typeof a === 'number' ).length;
 }
  
 /** 
@@ -340,7 +340,7 @@ function sortDigitNamesByNumericOrder(arr) {
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
 function getItemsSum(arr) {
-   return (arr.length == 0) ? 0 : arr.reduce( (a,b) => a+b);
+   return (arr.length === 0) ? 0 : arr.reduce( (a,b) => a+b);
 }
  
 /** 
@@ -457,7 +457,7 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-   return new Array( (start == end) ? 1 : (start == 0) ? end+1 : (start < 0 ) ? end + 1 + (-start) : end).fill(start).map((v, i) => v+i);
+   return new Array( (start === end) ? 1 : (start === 0) ? end+1 : (start < 0 ) ? end + 1 + (-start) : end).fill(start).map((v, i) => v+i);
 }
 
 /**
