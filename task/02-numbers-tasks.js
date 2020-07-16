@@ -89,7 +89,7 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   5*x = 0         => 0
  */
 function getLinearEquationRoot(a, b) {
-    return (b === undefined) ? 0 : (a === undefined) ? -b : -b/a;
+    return (-b/a < 1 && -b/a > -1) ? 0 : -b/a;
 }
 
 
@@ -202,12 +202,12 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
-    var result=[];
+    let result=[];
     for (let i=n; i > 0; i--){                    
-        if (n%i == 0 && n/i !== 1 && i !== 1){
+        if (n%i === 0 && n/i !== 1 && i !== 1){
             result.push(i);                       
-        }; 
-    };
+        } 
+    }
 
     return (result.length === 0); 
 }
