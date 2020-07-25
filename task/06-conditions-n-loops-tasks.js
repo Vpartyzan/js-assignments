@@ -246,7 +246,7 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+    return Array.from(num.toString()).reverse().join('');
 }
 
 
@@ -271,7 +271,16 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    throw new Error('Not implemented');
+    let sum = 0;
+    ccn = ccn.toString();
+
+    for (let i=0; i<ccn.length; i++) {
+        (ccn.length%2 !== i%2)
+            ? sum += ccn[i] * 1
+            : sum += ccn[i] * 2 + (ccn[i] > 4 ? -9 : 0);
+    }
+
+    return sum % 10 === 0;
 }
 
 
