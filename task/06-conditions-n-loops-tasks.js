@@ -334,7 +334,18 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
+    let brackets = ['[]', '{}', '<>', '()'];
+
+    for (let i=0; i<brackets.length;) {
+        if (str.indexOf(brackets[i]) != -1) {
+            str = str.replace(brackets[i], ''); 
+            i=0;
+        } else {
+            i+=1;
+        }            
+    }
+
+    return !str;
 }
 
 
@@ -370,7 +381,23 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-    throw new Error('Not implemented');
+    const time = endDate - startDate;
+    const sec = 1000;
+    const min = 60 * sec;
+    const hour = 60 * min;
+    const day = 24 * hour;
+    
+    return (time <= 45*sec) ? 'a few seconds ago' 
+                : (time <= 90*sec) ? 'a minute ago'
+                : (time <= 45*min) ? `${Math.round((time - 1) / min)} minutes ago`
+                : (time <= 90*min) ? 'an hour ago'
+                : (time <= 22*hour) ? `${Math.round((time - 1) / hour)} hours ago`
+                : (time <= 36*hour) ? 'a day ago'
+                : (time <= 25*day) ? `${Math.round((time - 1) / day)} days ago`
+                : (time <= 45*day) ? 'a month ago'
+                : (time <= 345*day) ? `${Math.round((time - 1) / day / 30)} months ago`
+                : (time <= 545*day) ? 'a year ago'
+                : `${Math.round((time - 1) / day / 365)} years ago`;
 }
 
 
