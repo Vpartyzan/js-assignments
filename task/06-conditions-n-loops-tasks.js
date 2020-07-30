@@ -421,7 +421,7 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+    return num.toString(n);
 }
 
 
@@ -438,7 +438,29 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-    throw new Error('Not implemented');
+    let result = '';
+    
+    for (let i = 0; i < pathes[0].length; i++) {
+        
+        let b = true;
+
+        for (let j = 1; j < pathes.length; j++) {
+
+            if (pathes[0][i] != pathes[j][i]) {
+                b = false;
+            }
+
+        }
+        
+        if (!b) {
+            break;
+        } else {
+            result += pathes[0][i];
+        }  
+
+    }
+    
+    return result.slice(0, result.lastIndexOf('/') + 1);
 }
 
 
@@ -461,7 +483,23 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-    throw new Error('Not implemented');
+    let result = [];
+      
+    for (let i=0; i < m1.length; i++) {
+        result[i] = new Array(m2[0].length).fill(0)
+    }
+  
+    m1.forEach((value, index) => {
+        for (let i = 0; i<m2[0].length; i++) {
+            result[index][i] = value[0]*m2[0][i]
+
+            for (let j=1; j<value.length; j++)  {
+                result[index][i] += value[j]*m2[j][i]
+            }
+        }
+    })
+  
+    return result
 }
 
 
