@@ -337,7 +337,7 @@ function isBracketsBalanced(str) {
     let brackets = ['[]', '{}', '<>', '()'];
 
     for (let i=0; i<brackets.length;) {
-        if (str.indexOf(brackets[i]) != -1) {
+        if (str.indexOf(brackets[i]) !== -1) {
             str = str.replace(brackets[i], ''); 
             i=0;
         } else {
@@ -446,7 +446,7 @@ function getCommonDirectoryPath(pathes) {
 
         for (let j = 1; j < pathes.length; j++) {
 
-            if (pathes[0][i] != pathes[j][i]) {
+            if (pathes[0][i] !== pathes[j][i]) {
                 b = false;
             }
 
