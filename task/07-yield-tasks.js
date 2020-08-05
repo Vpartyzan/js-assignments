@@ -59,8 +59,8 @@ function* get99BottlesOfBeer() {
  *
  */
 function* getFibonacciSequence() {
-    let prev = 0;
-    let curr = 1;
+    let prev = 0,
+        curr = 1;
     yield prev;
     yield curr;
 
@@ -105,9 +105,17 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
-    throw new Error('Not implemented');
-}
+    let nodes= [root];
 
+    while(nodes.length){
+        let root = nodes.pop();
+        yield root;
+
+        if (root.children) {
+            nodes.push(...root.children.reverse());
+        }
+    }
+}
 
 /**
  * Traverses a tree using the breadth-first strategy
@@ -131,7 +139,19 @@ function* depthTraversalTree(root) {
  *
  */
 function* breadthTraversalTree(root) {
-    throw new Error('Not implemented');
+    let arr = [root],
+        index = 0;
+
+    while (arr.length !== index){
+        root = arr[index];
+        yield root;
+
+        if (root.children){
+            arr.push(...root.children);
+        }
+
+        index++;
+    }
 }
 
 
@@ -149,7 +169,23 @@ function* breadthTraversalTree(root) {
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
  */
 function* mergeSortedSequences(source1, source2) {
-    throw new Error('Not implemented');
+    let s1 = source1(),
+        s2 = source2();
+        
+    
+        while (true) {
+            const val1 = s1.next(),
+                  val2 = s2.next();
+    
+            if (val1.done) {
+                yield val2.value;
+            } else if (val2.done) {
+                yield val1.value;
+            } else {
+                yield Math.min(val1.value, val2.value);
+                yield Math.max(val1.value, val2.value); 
+            }
+        }    
 }
 
 /**
@@ -168,7 +204,17 @@ function* mergeSortedSequences(source1, source2) {
  *   Most popular implementation of the logic in npm https://www.npmjs.com/package/co
  */
 function async(generator) {
-    throw new Error('Not implemented');
+    const gen = generator();
+    
+    const handle = (res) => {
+        return (res.done) 
+                    ? Promise.resolve(res.value)
+                    : Promise.resolve(res.value).then((res) => {
+                                                        return handle(gen.next(res));
+                                                });
+    }
+
+    return handle(gen.next());
 }
 
 
