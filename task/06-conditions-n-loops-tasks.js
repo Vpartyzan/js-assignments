@@ -30,13 +30,15 @@
  *
  */
 function getFizzBuzz(num) {
-    return (num % 3 === 0 && num % 5 === 0)
-                ? 'FizzBuzz'
-                : (num % 3 === 0)
-                    ? 'Fizz'
-                    : (num % 5 === 0)
-                        ? 'Buzz'
-                        : num;
+    if (num % 3 === 0 && num % 5 === 0) {
+        return 'FizzBuzz';
+    } else if (num % 3 === 0) {
+        return 'Fizz';
+    } else if (num % 5 === 0) {
+        return 'Buzz';
+    } else {
+        return num;
+    }
 }
 
 
@@ -52,7 +54,7 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    for (let i = n-1; i > 0 ; i--) {
+    for (let i = n - 1; i > 0 ; i--) {
         n *= i;
     }
     return n;
@@ -72,7 +74,7 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    for (let i = n1+1; i <= n2; i++) {
+    for (let i = n1 + 1; i <= n2; i++) {
         n1 += i;
     }
     return n1;
@@ -93,8 +95,8 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(a,b,c) {
-    return (a+b>c && a+c>b && b+c>a);
+function isTriangle(a, b, c) {
+    return (a + b > c && a + c > b && b + c > a);
 }
 
 
@@ -165,7 +167,7 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
-   return (Math.sqrt(Math.pow(circle.center.x - point.x, 2) + Math.pow(circle.center.y - point.y, 2))) < circle.radius;
+    return Math.hypot((circle.center.x - point.x) + (circle.center.y - point.y)) < circle.radius;
 }
 
 
@@ -181,7 +183,7 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    for (let i=0; i <= str.length; i++){
+    for (let i = 0; i <= str.length; i++){
         if (str.lastIndexOf(str[i]) === i && str.indexOf(str[i]) === i) {
             return str[i];
         }
@@ -274,8 +276,8 @@ function isCreditCardNumber(ccn) {
     let sum = 0;
     ccn = ccn.toString();
 
-    for (let i=0; i<ccn.length; i++) {
-        (ccn.length%2 !== i%2)
+    for (let i = 0; i < ccn.length; i++) {
+        (ccn.length % 2 !== i % 2)
             ? sum += ccn[i] * 1
             : sum += ccn[i] * 2 + (ccn[i] > 4 ? -9 : 0);
     }
@@ -336,12 +338,12 @@ function getDigitalRoot(num) {
 function isBracketsBalanced(str) {
     let brackets = ['[]', '{}', '<>', '()'];
 
-    for (let i=0; i<brackets.length;) {
+    for (let i = 0; i < brackets.length; ) {
         if (str.indexOf(brackets[i]) !== -1) {
             str = str.replace(brackets[i], ''); 
-            i=0;
+            i = 0;
         } else {
-            i+=1;
+            i += 1;
         }            
     }
 
@@ -387,17 +389,29 @@ function timespanToHumanString(startDate, endDate) {
     const hour = 60 * min;
     const day = 24 * hour;
     
-    return (time <= 45*sec) ? 'a few seconds ago' 
-                : (time <= 90*sec) ? 'a minute ago'
-                : (time <= 45*min) ? `${Math.round((time - 1) / min)} minutes ago`
-                : (time <= 90*min) ? 'an hour ago'
-                : (time <= 22*hour) ? `${Math.round((time - 1) / hour)} hours ago`
-                : (time <= 36*hour) ? 'a day ago'
-                : (time <= 25*day) ? `${Math.round((time - 1) / day)} days ago`
-                : (time <= 45*day) ? 'a month ago'
-                : (time <= 345*day) ? `${Math.round((time - 1) / day / 30)} months ago`
-                : (time <= 545*day) ? 'a year ago'
-                : `${Math.round((time - 1) / day / 365)} years ago`;
+    if (time <= 45*sec) {
+        return 'a few seconds ago';
+    } else if (time <= 90*sec) {
+        return 'a minute ago';
+    } else if (time <= 45*min) {
+        return `${Math.round((time - 1) / min)} minutes ago`;
+    } else if (time <= 90*min) {
+        return 'an hour ago';
+    } else if (time <= 22*hour) {
+        return `${Math.round((time - 1) / hour)} hours ago`;
+    } else if (time <= 36*hour) {
+        return 'a day ago';
+    } else if (time <= 25*day) {
+        return `${Math.round((time - 1) / day)} days ago`;
+    } else if (time <= 45*day) {
+        return 'a month ago';
+    } else if (time <= 345*day) {
+        return `${Math.round((time - 1) / day / 30)} months ago`;
+    } else if (time <= 545*day) {
+        return 'a year ago';
+    } else {
+        return `${Math.round((time - 1) / day / 365)} years ago`;
+    }
 }
 
 
@@ -485,21 +499,21 @@ function getCommonDirectoryPath(pathes) {
 function getMatrixProduct(m1, m2) {
     let result = [];
       
-    for (let i=0; i < m1.length; i++) {
-        result[i] = new Array(m2[0].length).fill(0)
+    for (let i = 0; i < m1.length; i++) {
+        result[i] = new Array(m2[0].length).fill(0);
     }
   
     m1.forEach((value, index) => {
-        for (let i = 0; i<m2[0].length; i++) {
-            result[index][i] = value[0]*m2[0][i]
+        for (let i = 0; i < m2[0].length; i++) {
+            result[index][i] = value[0] * m2[0][i];
 
-            for (let j=1; j<value.length; j++)  {
-                result[index][i] += value[j]*m2[j][i]
+            for (let j = 1; j < value.length; j++)  {
+                result[index][i] += value[j] * m2[j][i];
             }
         }
     })
   
-    return result
+    return result;
 }
 
 
