@@ -34,7 +34,7 @@
  */
 function* get99BottlesOfBeer() {
     
-    for (let i = 99; i>2; i--) {
+    for (let i = 99; i > 2; i--) {
         yield `${i} bottles of beer on the wall, ${i} bottles of beer.`;
         yield `Take one down and pass it around, ${i-1} bottles of beer on the wall.`;
     }
@@ -205,13 +205,15 @@ function* mergeSortedSequences(source1, source2) {
  */
 function async(generator) {
     const gen = generator();
-    
+
     const handle = (res) => {
-        return (res.done) 
-                    ? Promise.resolve(res.value)
-                    : Promise.resolve(res.value).then((res) => {
-                                                        return handle(gen.next(res));
-                                                });
+        if (res.done) {
+            return Promise.resolve(res.value);
+        } else {
+            return Promise.resolve(res.value).then((res) => {
+                return handle(gen.next(res));
+            });
+        }
     }
 
     return handle(gen.next());
