@@ -207,13 +207,15 @@ function async(generator) {
     const gen = generator();
 
     const handle = (res) => {
+
         if (res.done) {
             return Promise.resolve(res.value);
-        } else {
-            return Promise.resolve(res.value).then((res) => {
+        }
+
+        return Promise.resolve(res.value).then((res) => {
                 return handle(gen.next(res));
             });
-        }
+
     }
 
     return handle(gen.next());
